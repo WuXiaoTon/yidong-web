@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/
+jquery.mobile-1.4.5.min.css" />
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+		<style>
+			img{
+				border-radius: 50%;
+				height: 6em;
+				text-align: center;
+			}
+			#img{
+				border:50%:
+			}
+			#center{
+				color: gray;
+			}
+			#zc{
+				width: 60%;
+			}
+		</style>
+    	<script>
+			function check(){
+				var password = document.getElementById('password'); 
+				var repassword = document.getElementById('repassword');
+				var name=document.getElementById('name');
+				if(repassword.value != password.value){
+					alert("两次输入的密码不一致");
+					$("repassword").focus();  
+       				return false;
+				}else{
+					$.ajax({
+					 	type:'get',
+					 	url:'http://datainfo.duapp.com/shopdata/userinfo.php',
+					 	data:{status:'register',userID:this.name.value,password:this.password.value},
+					 	dataType:'json',
+					 	success:function(data){
+					 		console.log(data);
+					 		if(data==1){
+					 			alert('注册成功!');
+					 			window.location.href="text1.html";
+					 		}else if(data==0){
+					 			document.write('用户重名');
+					 		}else if(data==2){
+					 			alert('注册失败!');
+					 		}
+					 	}
+					})
+				}
+			}
+		</script>
+		
+	</head>
+	<body>
+		<div data-role="page" data-theme="b">
+			<div data-role="header" data-position="fixed">
+				<h1>注册</h1>
+			</div>
+	      	<div data-role="content" id="center" data-fullscreen="false"> 
+	      		<div id="img" align="center"><img src="timg.jpg" alt="" /></div>
+	      		<div align="center">
+	      			<form action="" onsubmit="check();" method="post">
+		      		<table id="tab">
+					<tr>
+						<td><label for="fullname">昵称:<label></td>
+						<td><input type="text" name="name" id="name"></td>
+					</tr>
+					<tr>
+						<td><label for="fullname">密码:<label></td>
+						<td><input type="password" name="password" id="password"></td>
+					</tr>
+					<tr>
+						<td><label for="fullname">确认密码:<label></td>
+						<td><input type="password" name="repassword" id="repassword"></td>
+					</tr>
+					</table>
+					<div id="zc">
+						<input type="submit" name="" id="btn" value="注册"/>
+					</div>
+					
+					</form>
+	      		</div>
+	      	</div>
+	      	<div data-role="footer" data-position="fixed" style="text-align:center;" data-role="controlgroup" data-type ="horizontal" data-theme="c">
+    		<a href="2.html">已有账号，登录</a>
+    		</div>
+    	</div> 
+    	
+	</body>
+	
+</html>
